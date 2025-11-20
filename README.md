@@ -27,42 +27,39 @@ Stores feedback entries with:
 ### **🔹 IAM Role-Based Security**
 Lambda uses least-privilege access to DynamoDB and CloudWatch.
 
-### **🔹 (Optional) CloudFront CDN**
+### **🔹 CloudFront CDN**
 For HTTPS, caching, and global performance optimization.
 
 ---
 
 ##  Repository Structure
 
-aws-feedback-app/
-├── frontend/
-│ ├── index.html # User interface for submitting feedback
-│ ├── script.js # JS API call to API Gateway endpoint
-│ └── style.css # Styling for UI
-│
-├── backend/
-│ └── lambda_function.py # Lambda handler that stores data in DynamoDB
-│
-├── dynamodb-table-schema.json # Schema for FeedbackTable
-│
-└── README.md # Project documentation
+    aws-feedback-app/
+    ├── frontend/
+    │ ├── index.html # User interface for submitting feedback
+    │ ├── script.js # JS API call to API Gateway endpoint
+    │ └── style.css # Styling for UI
+    │
+    ├── backend/
+    │ └── lambda_function.py # Lambda handler that stores data in DynamoDB
+    │
+    ├── dynamodb-table-schema.json # Schema for FeedbackTable
+    │
+    └── README.md # Project documentation
 
 
 ---
 
 ##  Architecture Overview
-
-User → S3 Static Website
-↓
-Browser JS
-↓
-API Gateway (POST /feedback)
-↓
-Lambda Function
-↓
-DynamoDB Table
-
-
+        User (Browser)
+              ↓
+    S3 Static Website Hosting
+              ↓
+  JavaScript fetch() → API Gateway (POST /feedback)
+              ↓
+        AWS Lambda Function
+              ↓
+        DynamoDB (FeedbackTable)
 ---
 
 ## Deployment Steps (Summary)
