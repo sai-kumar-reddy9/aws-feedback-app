@@ -1,7 +1,3 @@
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
->>>>>>> Stashed changes
 # AWS Serverless Feedback Submission App
 
 ## Overview
@@ -34,10 +30,5 @@ aws-feedback-app/
 4. Create API Gateway HTTP API or REST API with a POST route that integrates with Lambda and enable CORS.
 5. Deploy frontend to S3 and enable static website hosting. Update script.js with API invoke URL.
 6. (Optional) Configure CloudFront distribution for the S3 website or API.
-<<<<<<< Updated upstream
-======
-=======
-=======
->>>>>>> 37fff188ed6de91f0a623988543402c26cfde31e
->>>>>>> Stashed changes
+
 
