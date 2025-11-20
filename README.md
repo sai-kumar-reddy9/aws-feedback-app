@@ -1,132 +1,121 @@
-AWS Serverless Feedback Submission App
+#  AWS Serverless Feedback Submission App
 
-A fully functional serverless web application built using AWS services.
-This project demonstrates modern cloud application development using Lambda, API Gateway, DynamoDB, S3, and IAM.
-Users can submit feedback through a frontend hosted on S3, and their responses are stored securely in DynamoDB through a serverless backend.
+A fully functional **serverless web application** built using AWS services.  
+This project demonstrates modern cloud development using **Lambda, API Gateway, DynamoDB, S3, and IAM**.  
+Users submit feedback on a static website hosted on S3, and the backend securely stores it in DynamoDB using AWS Lambda.
 
- Features
+---
 
-Static Website Hosting (Amazon S3)
+##  Features
+
+### **🔹 Static Website Hosting (Amazon S3)**
 Frontend deployed on S3 with public website access.
 
-Serverless Backend (AWS Lambda – Python)
-Processes incoming feedback and writes to DynamoDB.
+### **🔹 Serverless Backend (AWS Lambda – Python)**
+Processes incoming feedback and writes entries to DynamoDB.
 
-API Routing (Amazon API Gateway)
-Secure POST endpoint with CORS enabled for frontend integration.
+### **🔹 API Routing (Amazon API Gateway)**
+Secure POST endpoint (`/feedback`) with CORS enabled for frontend integration.
 
-NoSQL Database (Amazon DynamoDB)
-Stores feedback entries with unique IDs, timestamps, and user details.
+### **🔹 NoSQL Database (Amazon DynamoDB)**
+Stores feedback entries with:
+- Unique ID  
+- Name  
+- Feedback message  
+- Timestamp  
 
-IAM Role-Based Security
-Lambda is restricted using least-privilege permissions for DynamoDB and CloudWatch.
+### **🔹 IAM Role-Based Security**
+Lambda uses least-privilege access to DynamoDB and CloudWatch.
 
-(Optional) CloudFront CDN
-Can be added for HTTPS, caching, and global performance.
+### **🔹 (Optional) CloudFront CDN**
+For HTTPS, caching, and global performance optimization.
 
-📁 Repository Structure
+---
+
+##  Repository Structure
+
 aws-feedback-app/
 ├── frontend/
-│   ├── index.html          # User interface for submitting feedback
-│   ├── script.js           # API call to API Gateway endpoint
-│   └── style.css           # Basic styling for UI
+│ ├── index.html # User interface for submitting feedback
+│ ├── script.js # JS API call to API Gateway endpoint
+│ └── style.css # Styling for UI
 │
 ├── backend/
-│   └── lambda_function.py  # Lambda handler to store data in DynamoDB
+│ └── lambda_function.py # Lambda handler that stores data in DynamoDB
 │
-├── dynamodb-table-schema.json  # Table schema for FeedbackTable
+├── dynamodb-table-schema.json # Schema for FeedbackTable
 │
-└── README.md               # Project documentation
-
-Architecture Overview
-User → S3 Website → API Gateway (POST /feedback)
-       ↓                         ↓
-    Browser JS  →→→→→→→→   Lambda Function
-                                 ↓
-                           DynamoDB Table
+└── README.md # Project documentation
 
 
-User submits feedback on the hosted website
+---
 
-JavaScript sends data to API Gateway
+##  Architecture Overview
 
-API Gateway triggers AWS Lambda
+User → S3 Static Website
+↓
+Browser JS
+↓
+API Gateway (POST /feedback)
+↓
+Lambda Function
+↓
+DynamoDB Table
 
-Lambda writes to DynamoDB
 
-Response returned to UI
+---
 
- Deployment Steps
+## Deployment Steps (Summary)
 
-Create DynamoDB Table
-Table name: FeedbackTable
-Primary key: id (String)
-Billing mode: On-Demand.
+### **1. Create DynamoDB Table**
+- Table name: `FeedbackTable`  
+- Primary key: `id` (String)  
+- Billing mode: On-Demand
 
-Create IAM Role for Lambda
+### **2. Create IAM Role for Lambda**
 Attach:
+- `AmazonDynamoDBFullAccess`
+- `AWSLambdaBasicExecutionRole`
 
-AmazonDynamoDBFullAccess
+### **3. Create Lambda Function**
+- Runtime: Python 3.10  
+- Add environment variable:  
+  `FEEDBACK_TABLE = FeedbackTable`  
+- Deploy code from `backend/lambda_function.py`
 
-AWSLambdaBasicExecutionRole
+### **4. Create API Gateway Endpoint**
+- HTTP API  
+- Route: `POST /feedback`  
+- Integrate with Lambda  
+- Enable CORS  
+- Copy the Invoke URL and update `script.js`
 
-Create Lambda Function (Python 3.10)
+### **5. Host Frontend on S3**
+- Upload `index.html`, `style.css`, `script.js`  
+- Enable public access  
+- Enable static website hosting  
 
-Upload lambda_function.py code
+### **6. (Optional) Add CloudFront**
+- Origin: S3 website endpoint  
+- Get secure HTTPS domain  
 
-Add environment variable:
-FEEDBACK_TABLE=FeedbackTable
+---
 
-Create API Gateway Endpoint
+## Technology Stack
 
-HTTP API
+- **Frontend:** HTML, CSS, JavaScript  
+- **Serverless Compute:** AWS Lambda (Python)  
+- **API Layer:** Amazon API Gateway  
+- **Database:** DynamoDB  
+- **Hosting:** Amazon S3  
+- **Security:** AWS IAM  
+- **Monitoring:** AWS CloudWatch Logs  
 
-Route: POST /feedback
+---
 
-Integrate with Lambda
+##  Author
 
-Enable CORS
+**Sai Kumar Reddy**  
+Cloud & Full-Stack Developer  
+GitHub: [sai-kumar-reddy9](https://github.com/sai-kumar-reddy9)
 
-Copy Invoke URL and update in script.js
-
-Host Frontend on S3
-
-Create bucket
-
-Upload index.html, style.css, script.js
-
-Enable static website hosting
-
-Add public bucket policy
-
-(Optional) Add CloudFront Distribution
-
-Origin → S3 website URL
-
-Get global HTTPS URL
-
-🔗 Live Demo URL
-
-http://saikumarreddys-feedback-app.s3-website.eu-north-1.amazonaws.com/
-
-📌 Technology Stack
-
-Frontend: HTML, CSS, JavaScript
-
-Backend: AWS Lambda (Python)
-
-API Layer: Amazon API Gateway
-
-Database: DynamoDB
-
-Hosting: Amazon S3
-
-Security: IAM
-
-Monitoring: CloudWatch (Logs for Lambda)
-
-📝 Author
-
-Sai Kumar Reddy
-AWS | Java | MERN | Cloud Enthusiast
-GitHub: https://github.com/sai-kumar-reddy9
