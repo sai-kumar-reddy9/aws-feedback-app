@@ -10,6 +10,7 @@ A serverless application demonstrating deployment on AWS:
 
 ## Repo structure
 ```
+
 aws-feedback-app/
 ├── frontend/
 │   ├── index.html
