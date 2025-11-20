@@ -50,17 +50,17 @@ For HTTPS, caching, and global performance optimization.
 
 ---
 
-##  Architecture Overview
-        User (Browser)
-              ↓
-    S3 Static Website Hosting
-              ↓
-  JavaScript fetch() → API Gateway (POST /feedback)
-              ↓
-        AWS Lambda Function
-              ↓
-        DynamoDB (FeedbackTable)
----
+ ##  Architecture Overview
+            User (Browser)
+                ↓
+        S3 Static Website Hosting
+                ↓
+    JavaScript fetch() → API Gateway (POST /feedback)
+                ↓
+            AWS Lambda Function
+                ↓
+            DynamoDB (FeedbackTable)
+    ---
 
 ## Deployment Steps (Summary)
 
